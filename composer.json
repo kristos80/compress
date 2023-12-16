@@ -25,5 +25,5 @@
         "release:major": "conventional-changelog --major --commit",
         "test": "vendor/bin/phpunit tests"
     },
-    "version": "1.0.0"
+    "version": "1.0.1"
 }
