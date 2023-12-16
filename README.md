@@ -12,7 +12,7 @@ use Kristos80\Compress\Compress;
 
 require_once __DIR__ . "/../vendor/autoload.php";
 
-# A not so useful example, but you get the idea that anything can compressed as internally it gets serialized
+# A not so useful example, but you get the idea that anything can be compressed as internally it gets serialized
 $data = ["foo" => "dummy"];
 # Prints wHFQO5fHxiiWjq7Pnd5dWK6yLNiIPGxWslAOBQMob81XgHJouEzr3zlNEN2RDQv2
 echo $compressedData = Compress::compress($data);
