@@ -2,6 +2,16 @@
 
 Compress is a really minimal tool --in fact a wrapper for some chained low level functions-- that can compress any arbitrary piece of data (text, arrays, objects, etc.) 
 
+---
+
+### WIP -- Do not use in production yet as: ###
+
+* It's not tested extensively
+* It's used mainly to internal projects and might have breaking changes without prior notice
+* There are probably a lot of missing features
+
+---
+
 *  🎉 The compressed result is URL safe
 * The [`gmp` extension](https://www.php.net/manual/en/book.gmp.php) is required in order to work
 
