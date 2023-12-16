@@ -2,7 +2,10 @@
 
 Compress is a really minimal tool --in fact a wrapper for some chained low level functions-- that can compress any arbitrary piece of data (text, arrays, objects, etc.) 
 
-The [`gmp` extension](https://www.php.net/manual/en/book.gmp.php) is required in order to work.
+*  🎉 The compressed result is URL safe
+* The [`gmp` extension](https://www.php.net/manual/en/book.gmp.php) is required in order to work
+
+## Example usage
 
 ```PHP
 <?php
