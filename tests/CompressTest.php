@@ -11,12 +11,14 @@ final class CompressTest extends TestCase {
 	 */
 	public function testCompression(): void {
 		$data = ["foo" => "dummy"];
-		$compressedData = Compress::compress($data);
+        $compressor = new Compress();
+        $compressedData = $compressor->compress($data);
+        $decompressedData = $compressor->decompress($compressedData);
 
-		$this->assertEquals($data, Kristos80\Compress\Compress::decompress($compressedData));
+		$this->assertEquals($data, $decompressedData);
 
 		$longString = str_repeat("A very very very long string", 100);
-		$compressedLongString = Compress::compress($longString);
+		$compressedLongString = $compressor->compress($longString);
 		$this->assertTrue(strlen($longString) > strlen($compressedLongString));
 	}
 

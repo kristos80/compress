@@ -9,7 +9,7 @@ final class Compress {
 	 * @param mixed $data
 	 * @return string
 	 */
-	public static function compress(mixed $data): string {
+	public  function compress(mixed $data): string {
 		return gmp_strval(gmp_init(bin2hex(gzencode(serialize($data))), 16), 62);
 	}
 
@@ -17,7 +17,7 @@ final class Compress {
 	 * @param string $string
 	 * @return mixed
 	 */
-	public static function decompress(string $string): mixed {
+	public function decompress(string $string): mixed {
 		return unserialize(gzdecode(hex2bin(gmp_strval(gmp_init($string, 62), 16))));
 	}
 }
