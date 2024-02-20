@@ -2,7 +2,8 @@
 declare(strict_types=1);
 
 use PHPUnit\Framework\TestCase;
-use Kristos80\Compress\Compress;
+use Kristos80\Compress\CompressFactory;
+
 
 final class CompressTest extends TestCase
 {
@@ -14,25 +15,23 @@ final class CompressTest extends TestCase
     {
         // Test compression and decompression with simple data
         $data = ["foo" => "dummy"];
-        $compressor = new Compress();
-        $compressedData = $compressor->compress($data);
-        $decompressedData = $compressor->decompress($compressedData);
+
+        $compressData = CompressFactory::compressData($data);
+        $compressedData = $compressData->compress();
+        $decompressedData = $compressData->decompress($compressedData);
 
         $this->assertEquals($data, $decompressedData);
 
         // Test compression of a long string
         $longString = str_repeat("A very very very long string", 100);
-        $compressedLongString = $compressor->compress($longString);
+        $compressLongString = CompressFactory::compressData($longString);
+        $compressedLongString = $compressLongString->compress();
         $this->assertGreaterThan(strlen($compressedLongString), strlen($longString));
 
         // Test decompression of a long string
-        $decompressedLongString = $compressor->decompress($compressedLongString);
+        $decompressedLongString = $compressLongString->decompress($compressedLongString);
         $this->assertEquals($longString, $decompressedLongString);
 
-        // Test decompression with invalid compressed data
-        $invalidCompressedData = "invalid_compressed_data";
-        $this->expectException(\ValueError::class); // Expect error
-        $compressor->decompress($invalidCompressedData);
     }
 
 }

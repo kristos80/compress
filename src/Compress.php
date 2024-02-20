@@ -3,21 +3,34 @@ declare(strict_types=1);
 
 namespace Kristos80\Compress;
 
-final class Compress {
 
-	/***
-	 * @param mixed $data
-	 * @return string
-	 */
-	public  function compress(mixed $data): string {
-		return gmp_strval(gmp_init(bin2hex(gzencode(serialize($data))), 16), 62);
-	}
+class Compress {
 
-	/**
-	 * @param string $string
-	 * @return mixed
-	 */
-	public function decompress(string $string): mixed {
-		return unserialize(gzdecode(hex2bin(gmp_strval(gmp_init($string, 62), 16))));
-	}
+    /***
+     * @param mixed $data
+     * @return string
+     */
+
+    private $dataToCompress;
+
+    public function __construct($data)
+    {
+        $this->dataToCompress = $data;
+
+    }
+    public  function compress(): string {
+        return gmp_strval(gmp_init(bin2hex(gzencode(serialize($this->dataToCompress))), 16), 62);
+    }
+
+    /**
+     *
+     * @param string $string
+     * @return mixed
+     */
+
+    public function decompress(string $compressedData): mixed {
+        return unserialize(gzdecode(hex2bin(gmp_strval(gmp_init($compressedData, 62), 16))));
+    }
+
 }
+
