@@ -2,7 +2,7 @@
 
 namespace Kristos80\Compress;
 
-final class MinimalCompressor
+final class MinimalCompressor implements CompressorInterface
 {
     /***
      * @param mixed $data
@@ -10,7 +10,7 @@ final class MinimalCompressor
      */
 
     public function compress(mixed $data): string {
-      return base64_encode(implode('.',$data));
+        return base64_encode(serialize($data));
     }
 
     /**
@@ -20,11 +20,6 @@ final class MinimalCompressor
      */
 
     public function decompress(string $data): mixed {
-        return explode(',', base64_decode($data));
+        return unserialize(base64_decode($data));
     }
 }
-
-$compressor = new MinimalCompressor();
-$compressedData = $compressor->compress([ "foo" => "dummy"]);
-echo $compressedData;
-print_r($compressor->decompress($compressedData));
