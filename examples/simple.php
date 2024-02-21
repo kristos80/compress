@@ -8,15 +8,15 @@ require_once __DIR__ . "/../vendor/autoload.php";
 
 $data = ["foo" => "dummy"];
 
-$compressData = CompressFactory::compressData($data);
-$compressedData = $compressData->compress();
+$compressor = CompressFactory::create();
+$compressedData = $compressor->compress($data);
 echo $compressedData;
 echo PHP_EOL;
-$decompressData = CompressFactory::compressData($compressedData);
-print_r($decompressData->decompress());
+
+print_r($compressor->decompress($compressedData));
 
 $longString = str_repeat("This is a very long string that actually is better to compress it to make it smaller", 100);
-$compressData = CompressFactory::compressData($longString);
-echo $compressData->compress();
+$compressedData = $compressor->compress($longString);
+echo $compressedData;
 echo PHP_EOL;
 echo strlen($longString);
